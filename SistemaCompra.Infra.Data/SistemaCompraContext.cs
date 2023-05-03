@@ -30,7 +30,7 @@ namespace SistemaCompra.Infra.Data
         {
             optionsBuilder.UseLoggerFactory(loggerFactory)  
                 .EnableSensitiveDataLogging()
-                .UseSqlServer("Server=127.0.0.1;Persist Security Info=False;User ID=sa;Password=#sa123456;MultipleActiveResultSets=False;Encrypt=False;TrustServerCertificate=False;Connection Timeout=30;");
+                .UseSqlServer("Server=127.0.0.1;Persist Security Info=False;Database=SistemaCompraDb;User ID=sa;Password=#sa123456;MultipleActiveResultSets=False;Encrypt=False;TrustServerCertificate=False;Connection Timeout=30;");
         }
     }
 }
