@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using SistemaCompra.Domain.ProdutoAggregate;
 using SistemaCompra.Infra.Data.UoW;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 using ProdutoAgg = SistemaCompra.Domain.ProdutoAggregate;
@@ -16,6 +15,7 @@ namespace SistemaCompra.Application.Produto.Command.AtualizarPreco
         {
             this._produtoRepository = produtoRepository;
         }
+        
         public Task<bool> Handle(AtualizarPrecoCommand request, CancellationToken cancellationToken)
         {
             var produto = _produtoRepository.Obter(request.Id);

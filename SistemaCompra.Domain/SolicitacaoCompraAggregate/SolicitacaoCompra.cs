@@ -9,11 +9,17 @@ namespace SistemaCompra.Domain.SolicitacaoCompraAggregate
     public class SolicitacaoCompra : Entity
     {
         public UsuarioSolicitante UsuarioSolicitante { get; private set; }
+        
         public NomeFornecedor NomeFornecedor { get; private set; }
+        
         public IList<Item> Itens { get; private set; }
+        
         public DateTime Data { get; private set; }
+        
         public Money TotalGeral { get; private set; }
+        
         public Situacao Situacao { get; private set; }
+        
         public CondicaoPagamento CondicaoPagamento { get; private set; }
 
         private SolicitacaoCompra() { }
@@ -36,7 +42,7 @@ namespace SistemaCompra.Domain.SolicitacaoCompraAggregate
         public void RegistrarCompra(IEnumerable<Item> itens)
         {
             if (itens is null && itens.Any() is false)
-                return;
+                throw new ArgumentNullException("Não há itens a serem adicionados na solicitação de compra");
 
             Itens = itens.ToList();
 
@@ -49,7 +55,6 @@ namespace SistemaCompra.Domain.SolicitacaoCompraAggregate
             DefiniCondicaoPagamento();
         }
 
-
         private void DefiniCondicaoPagamento()
         {
             if (TotalGeral is null)
@@ -58,15 +63,11 @@ namespace SistemaCompra.Domain.SolicitacaoCompraAggregate
             CondicaoPagamento = new CondicaoPagamento(PrazoDiasPagamento(TotalGeral.Value));
         }
 
-
         private static int PrazoDiasPagamento(decimal valorTotal)
         {
             if (valorTotal > 50000) return 30; //30 dias prazo
 
             return default;
         }
-
-
-
     }
 }
