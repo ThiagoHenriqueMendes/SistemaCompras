@@ -21,7 +21,6 @@ namespace SistemaCompra.Infra.Data
                     new ProdutoAgg.Produto("Produto01", "Descricao01", "Madeira", 100)
                 );
 
-            modelBuilder.Entity<ProdutoAgg.Produto>().Ignore(x => x.PrecoProduto);
             modelBuilder.Ignore<Event>();
 
             modelBuilder.ApplyConfiguration(new ProdutoConfiguration());
