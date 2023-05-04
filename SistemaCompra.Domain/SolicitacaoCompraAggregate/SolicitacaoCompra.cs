@@ -64,11 +64,6 @@ namespace SistemaCompra.Domain.SolicitacaoCompraAggregate
             CondicaoPagamento = new CondicaoPagamento(PrazoDiasPagamento(TotalGeral.Value));
         }
 
-        private static int PrazoDiasPagamento(decimal valorTotal)
-        {
-            if (valorTotal > 50000) return 30; //30 dias prazo
-
-            return default;
-        }
+        private static int PrazoDiasPagamento(decimal valorTotal) => valorTotal > 50000 ? 30 : default;
     }
 }
