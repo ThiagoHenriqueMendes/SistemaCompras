@@ -46,7 +46,18 @@ namespace SistemaCompra.API
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Prova Sisprev", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "Prova Sisprev",
+                    Version = "v1",
+                    Description = "Os endpoints cuja rota existe 'v2', foi um adicional (forma diferente de tratar a informação e algum endpoint para facilitar alguns testes) desejada pelo autor.",
+                    Contact = new OpenApiContact()
+                    {
+                        Name = "Thiago Henrique Mendes",
+                        Email = "th-mendes@outlook.com",
+                        
+                    }
+                });
             });          
 
         }

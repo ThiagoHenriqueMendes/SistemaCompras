@@ -25,19 +25,19 @@ namespace SistemaCompra.API.SolicitacaoCompra
             return Ok(produtoViewModel);
         }
 
-        [HttpGet, Route("compra/lista")]
+        [HttpGet, Route("compra/v2/lista")]
         public IActionResult ObterTodasListas()
         {
             var produtoViewModel = _mediator.Send(new ObterSolicitacaoCompraQuery());
             return Ok(produtoViewModel);
         }
 
-        [HttpPost, Route("compra/registrar")]
+        [HttpPost, Route("compra/v2/registra")]
         [ProducesResponseType(201)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
-        public async Task<IActionResult> RegistrarCompra([FromBody] RegistrarCompraCommand registrarCompraCommand)
+        public async Task<IActionResult> RegistrarCompraV2([FromBody] RegistrarCompraCommand registrarCompraCommand)
         {
             try
             {
@@ -56,6 +56,17 @@ namespace SistemaCompra.API.SolicitacaoCompra
             {
                 return StatusCode(500);
             }
+        }
+
+        [HttpPost, Route("compra/registrar")]
+        [ProducesResponseType(201)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
+        public IActionResult RegistrarCompra([FromBody] RegistrarCompraCommand registrarCompraCommand)
+        {
+            var response = _mediator.Send(registrarCompraCommand);
+            return StatusCode(201);
         }
 
 
