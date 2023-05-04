@@ -22,25 +22,19 @@ namespace SistemaCompra.Application.SolicitacaoCompra.Command.RegistrarCompra
 
         public Task<bool> Handle(RegistrarCompraCommand requisicao, CancellationToken cancellationToken)
         {
-            try
-            {
-                var solicitacaoCompra = ConstruaObjetoSolicitacaoCompra(requisicao);
+            var solicitacaoCompra = ConstruaObjetoSolicitacaoCompra(requisicao);
 
-                var ListaItemCompra = ConstruaObjetoListaItemCompra(requisicao.ListaItem);
+            var ListaItemCompra = ConstruaObjetoListaItemCompra(requisicao.ListaItem);
 
-                solicitacaoCompra.RegistrarCompra(ListaItemCompra);
+            solicitacaoCompra.RegistrarCompra(ListaItemCompra);
 
-                _solicitacaoCompraRepository.Registrar(solicitacaoCompra);
+            _solicitacaoCompraRepository.Registrar(solicitacaoCompra);
 
-                Commit();
-                PublishEvents(solicitacaoCompra.Events);
+            Commit();
+            PublishEvents(solicitacaoCompra.Events);
 
-                return Task.FromResult(true);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            return Task.FromResult(true);
+
         }
 
         private SolicitacaoCompraAgg.SolicitacaoCompra ConstruaObjetoSolicitacaoCompra(RegistrarCompraCommand requisicao)

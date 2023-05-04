@@ -21,16 +21,12 @@ namespace SistemaCompra.API.SolicitacaoCompra
         [ProducesResponseType(500)]
         public IActionResult RegistrarCompra([FromBody] RegistrarCompraCommand registrarCompraCommand)
         {
-            try
-            {
-                var teste = _mediator.Send(registrarCompraCommand);
-                return StatusCode(201);
+            var response = _mediator.Send(registrarCompraCommand);
 
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(201);
-            }
+            if (response.Status == System.Threading.Tasks.TaskStatus.Faulted && response.Exception.)
+                return StatusCode(400);
+
+            return StatusCode(201);
         }
     }
 }
