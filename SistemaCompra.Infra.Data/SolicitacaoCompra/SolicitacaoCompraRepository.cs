@@ -1,4 +1,7 @@
-﻿using SistemaCompra.Domain.SolicitacaoCompraAggregate;
+﻿using Microsoft.EntityFrameworkCore;
+using SistemaCompra.Domain.SolicitacaoCompraAggregate;
+using System;
+using System.Linq;
 using SolicitaCompraAgg = SistemaCompra.Domain.SolicitacaoCompraAggregate;
 
 namespace SistemaCompra.Infra.Data.SolicitacaoCompra
@@ -16,5 +19,8 @@ namespace SistemaCompra.Infra.Data.SolicitacaoCompra
         {
             _context.Set<SolicitaCompraAgg.SolicitacaoCompra>().Add(entity);
         }
+
+        public SolicitaCompraAgg.SolicitacaoCompra Obter(Guid id)
+            => _context.SolicitacaoCompras.Include(x => x.Itens).ThenInclude(y => y.Produto).Where(c => c.Id == id).FirstOrDefault();
     }
 }

@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using SistemaCompra.Application.SolicitacaoCompra.Command.RegistrarCompra;
+using SistemaCompra.Application.SolicitacaoCompra.Query;
 using SistemaCompra.Domain.Core;
 using System;
 using System.Threading.Tasks;
@@ -14,6 +15,13 @@ namespace SistemaCompra.API.SolicitacaoCompra
         public SolicitacaoCompraController(IMediator mediator)
         {
             _mediator = mediator;
+        }
+
+        [HttpGet, Route("compra/{id}")]
+        public IActionResult Obter(Guid id)
+        {
+            var produtoViewModel = _mediator.Send(new ObterSolicitacaoCompraQuery(id));
+            return Ok(produtoViewModel);
         }
 
         [HttpPost, Route("compra/registrar")]
@@ -30,7 +38,7 @@ namespace SistemaCompra.API.SolicitacaoCompra
             }
             catch (BusinessRuleException ex)
             {
-                return StatusCode(400,ex.Message);
+                return StatusCode(400, ex.Message);
             }
             catch (ArgumentNullException ex)
             {
@@ -40,7 +48,9 @@ namespace SistemaCompra.API.SolicitacaoCompra
             {
                 return StatusCode(500);
             }
-
         }
+
+
+
     }
 }
