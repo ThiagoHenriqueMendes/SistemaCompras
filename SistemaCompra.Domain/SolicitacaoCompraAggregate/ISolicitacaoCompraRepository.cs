@@ -2,6 +2,6 @@
 {
     public interface ISolicitacaoCompraRepository
     {
-        void RegistrarCompra(SolicitacaoCompra solicitacaoCompra);
+        void Registrar(SolicitacaoCompra solicitacaoCompra);
     }
 }

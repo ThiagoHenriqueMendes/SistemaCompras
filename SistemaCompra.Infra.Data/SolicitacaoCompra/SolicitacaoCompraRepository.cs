@@ -12,7 +12,7 @@ namespace SistemaCompra.Infra.Data.SolicitacaoCompra
             _context = context;
         }
 
-        public void RegistrarCompra(SolicitaCompraAgg.SolicitacaoCompra entity)
+        public void Registrar(SolicitaCompraAgg.SolicitacaoCompra entity)
         {
             _context.Set<SolicitaCompraAgg.SolicitacaoCompra>().Add(entity);
         }
