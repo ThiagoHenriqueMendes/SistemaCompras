@@ -25,7 +25,7 @@ namespace SistemaCompra.Domain.ProdutoAggregate
             Nome = nome ?? throw new ArgumentNullException(nameof(nome));
             Descricao = descricao ?? throw new ArgumentNullException(nameof(descricao));
             Preco = new Money(preco);
-            Categoria = (Categoria)Enum.Parse(typeof(Categoria), categoria);
+            Categoria = ValidaCategoria(categoria);
             Situacao = Situacao.Ativo;
         }
 
@@ -46,6 +46,15 @@ namespace SistemaCompra.Domain.ProdutoAggregate
             Preco = new Money(preco);
 
             AddEvent(new PrecoAtualizadoEvent(Id, Preco.Value));
+        }
+
+
+        private static Categoria ValidaCategoria(string valor)
+        {
+            if (Enum.TryParse(valor, out Categoria resultado) is false)
+                throw new BusinessRuleException("Categoria informado no produto inválido.");
+
+            return resultado;
         }
     }
 }

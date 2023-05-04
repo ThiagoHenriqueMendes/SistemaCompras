@@ -26,5 +26,19 @@ namespace SistemaCompra.Domain.Test.SolicitacaoCompraAggregate
             //Então
             Assert.Equal(30, solicitacao.CondicaoPagamento.Valor);
         }
+
+        [Fact]
+        public void NotificarErroQuandoNaoInformarItensCompra()
+        {
+            //Dado
+            var solicitacao = new SolicitacaoCompra("rodrigoasth", "rodrigoasth");
+            var itens = new List<Item>();
+
+            //Quando 
+            var ex = Assert.Throws<BusinessRuleException>(() => solicitacao.RegistrarCompra(itens));
+
+            //Então
+            Assert.Equal("A solicitação de compra deve possuir itens!", ex.Message);
+        }
     }
 }

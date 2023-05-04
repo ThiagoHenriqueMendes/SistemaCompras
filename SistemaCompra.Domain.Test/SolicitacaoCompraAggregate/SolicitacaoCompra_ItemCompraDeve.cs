@@ -19,17 +19,16 @@ namespace SistemaCompra.Domain.Test.SolicitacaoCompraAggregate
         }
 
         [Fact]
-        public void NotificarErroQuandoNaoInformarItensCompra()
+        public void NotificarErroQuandoNaoInformarProdutoCompra()
         {
             //Dado
-            var solicitacao = new SolicitacaoCompra("rodrigoasth", "rodrigoasth");
             var itens = new List<Item>();
 
             //Quando 
-            var ex = Assert.Throws<BusinessRuleException>(() => solicitacao.RegistrarCompra(itens));
+            var ex = Assert.Throws<ArgumentNullException>(() => itens.Add(new Item(null, 0)));
 
             //Então
-            Assert.Equal("A solicitação de compra deve possuir itens!", ex.Message);
+            Assert.IsType(typeof(ArgumentNullException), ex);
         }
 
         [Fact]
