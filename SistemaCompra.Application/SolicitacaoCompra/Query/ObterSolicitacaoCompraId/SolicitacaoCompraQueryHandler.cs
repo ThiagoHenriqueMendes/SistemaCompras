@@ -4,9 +4,9 @@ using SistemaCompra.Domain.SolicitacaoCompraAggregate;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace SistemaCompra.Application.SolicitacaoCompra.Query
+namespace SistemaCompra.Application.SolicitacaoCompra.Query.ObterSolicitacaoCompraId
 {
-    public class SolicitacaoCompraQueryHandler : IRequestHandler<ObterSolicitacaoCompraQuery, SolicitacaoCompraViewModel>
+    public class SolicitacaoCompraQueryHandler : IRequestHandler<ObterSolicitacaoCompraIDQuery, SolicitacaoCompraIdViewModel>
     {
         private readonly ISolicitacaoCompraRepository _solicitacaoCompraRepository;
         private readonly IMapper _mapper;
@@ -16,10 +16,10 @@ namespace SistemaCompra.Application.SolicitacaoCompra.Query
             _solicitacaoCompraRepository = solicitacaoCompraRepository;
             _mapper = mapper;
         }
-        public Task<SolicitacaoCompraViewModel> Handle(ObterSolicitacaoCompraQuery request, CancellationToken cancellationToken)
+        public Task<SolicitacaoCompraIdViewModel> Handle(ObterSolicitacaoCompraIDQuery request, CancellationToken cancellationToken)
         {
             var compra = _solicitacaoCompraRepository.Obter(request.Id);
-            var produtoViewModel = _mapper.Map<SolicitacaoCompraViewModel>(compra);
+            var produtoViewModel = _mapper.Map<SolicitacaoCompraIdViewModel>(compra);
 
             return Task.FromResult(produtoViewModel);
         }

@@ -1,7 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using SistemaCompra.Application.SolicitacaoCompra.Command.RegistrarCompra;
-using SistemaCompra.Application.SolicitacaoCompra.Query;
+using SistemaCompra.Application.SolicitacaoCompra.Query.ObterSolicitacaoCompraId;
+using SistemaCompra.Application.SolicitacaoCompra.Query.ObterTodosSolicitacaoCompra;
 using SistemaCompra.Domain.Core;
 using System;
 using System.Threading.Tasks;
@@ -20,7 +21,14 @@ namespace SistemaCompra.API.SolicitacaoCompra
         [HttpGet, Route("compra/{id}")]
         public IActionResult Obter(Guid id)
         {
-            var produtoViewModel = _mediator.Send(new ObterSolicitacaoCompraQuery(id));
+            var produtoViewModel = _mediator.Send(new ObterSolicitacaoCompraIDQuery(id));
+            return Ok(produtoViewModel);
+        }
+
+        [HttpGet, Route("compra/lista")]
+        public IActionResult ObterTodasListas()
+        {
+            var produtoViewModel = _mediator.Send(new ObterSolicitacaoCompraQuery());
             return Ok(produtoViewModel);
         }
 

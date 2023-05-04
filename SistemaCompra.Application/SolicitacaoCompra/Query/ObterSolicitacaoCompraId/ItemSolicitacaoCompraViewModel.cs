@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SistemaCompra.Application.SolicitacaoCompra.Query
+namespace SistemaCompra.Application.SolicitacaoCompra.Query.ObterSolicitacaoCompraId
 {
     public class ItemSolicitacaoCompraViewModel
     {
@@ -11,6 +11,5 @@ namespace SistemaCompra.Application.SolicitacaoCompra.Query
         public decimal Subtotal { get; set; }
 
         public Guid ProdutoId { get; set; }
-
     }
 }

@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SistemaCompra.Application.SolicitacaoCompra.Query
+namespace SistemaCompra.Application.SolicitacaoCompra.Query.ObterSolicitacaoCompraId
 {
-    public class SolicitacaoCompraViewModel
+    public class SolicitacaoCompraIdViewModel
     {
-        public string UsuarioSolicitante  { get; set; }
+        public Guid Id { get; set; }
+        public string UsuarioSolicitante { get; set; }
 
         public string NomeFornecedor { get; set; }
 

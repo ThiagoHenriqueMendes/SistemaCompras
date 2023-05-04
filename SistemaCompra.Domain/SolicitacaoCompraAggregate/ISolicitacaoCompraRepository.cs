@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace SistemaCompra.Domain.SolicitacaoCompraAggregate
 {
@@ -7,5 +8,7 @@ namespace SistemaCompra.Domain.SolicitacaoCompraAggregate
         void Registrar(SolicitacaoCompra solicitacaoCompra);
 
         SolicitacaoCompra Obter(Guid id);
+
+        IEnumerable<Guid> ObterTodos();
     }
 }
